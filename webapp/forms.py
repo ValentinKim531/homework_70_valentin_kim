@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import CheckboxSelectMultiple
 
-from webapp.models import Type
+from webapp.models import Type, Project
 from webapp.models import Issue
 import string
 
@@ -10,9 +10,7 @@ import string
 def eng_letters_validator(summary):
     # проверяем требование на отсутствие кириллицы в поле 'summary'
     if not all(abc in string.printable for abc in summary):
-        raise ValidationError(
-            "You need to fill in only English letters"
-        )
+        raise ValidationError("You need to fill in only English letters")
     return summary
 
 
@@ -20,9 +18,7 @@ def checkbox_qty_validator(type):
     # проверяем требование на кол-во выбранных типов задачи(проблемы) не более двух
     for i in type:
         if len(type) > 2:
-            raise ValidationError(
-                "You need to choose maximum two of types"
-            )
+            raise ValidationError("You need to choose maximum two of types")
     return type
 
 
@@ -69,3 +65,24 @@ class IssueForm(forms.ModelForm):
 
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти")
+
+
+class ProjectForm(forms.ModelForm):
+
+    class Meta:
+        model = Project
+        fields = (
+            "start_date",
+            "end_date",
+            "title",
+            "description",
+        )
+
+        labels = {
+            "start_date": "Дата начала в формате YYYY-MM-DD",
+            "end_date": "Дата окончания в формате YYYY-MM-DD",
+            "title": "Название",
+            "description": "Описание",
+        }
+
+

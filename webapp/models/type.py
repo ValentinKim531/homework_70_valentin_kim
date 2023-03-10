@@ -2,9 +2,7 @@ from django.db import models
 
 
 class Type(models.Model):
-    name = models.CharField(
-        max_length=30, verbose_name="Тип"
-    )
+    name = models.CharField(max_length=30, verbose_name="Тип")
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name="Время создания"
     )

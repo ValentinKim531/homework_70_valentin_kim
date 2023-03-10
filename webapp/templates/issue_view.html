@@ -30,6 +30,11 @@
             <div class="fw-bold">Status: {{ issue.status }}</div>
         </div>
     </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">Project: {{ issue.project.title }}</div>
+        </div>
+    </li>
 </ul>
 <form action="{% url 'issue_delete' issue.pk%}">
     {% csrf_token %}

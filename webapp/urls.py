@@ -1,9 +1,13 @@
 from django.urls import path
 
-from webapp.views.base import IndexView, IndexRedirectView
+from webapp.views.base import IndexView, IndexRedirectView, ProjectRedirectView, ProjectView
 from webapp.views.issues import (
-    IssueDetail, IssueCreateView, IssueUpdateView, IssueDeleteView,
+    IssueDetail,
+    IssueCreateView,
+    IssueUpdateView,
+    IssueDeleteView,
 )
+from webapp.views.projects_view import ProjectDetail, ProjectCreateView
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
@@ -32,5 +36,21 @@ urlpatterns = [
         "issue/<int:pk>/update/",
         IssueUpdateView.as_view(),
         name="issue_update",
+    ),
+    path("projects/", ProjectView.as_view(), name="index_projects"),
+    path(
+        "projects/list/",
+        ProjectRedirectView.as_view(),
+        name="project_index_redirect",
+    ),
+    path(
+        "project/<int:pk>",
+        ProjectDetail.as_view(),
+        name="project_detail",
+    ),
+    path(
+        "project/add",
+        ProjectCreateView.as_view(),
+        name="project_add",
     ),
 ]

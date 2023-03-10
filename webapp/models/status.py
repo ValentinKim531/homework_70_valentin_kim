@@ -2,9 +2,7 @@ from django.db import models
 
 
 class Status(models.Model):
-    name = models.CharField(
-        max_length=30, verbose_name="Статус"
-    )
+    name = models.CharField(max_length=30, verbose_name="Статус")
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name="Время создания"
     )

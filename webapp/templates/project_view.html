@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Project view{% endblock %}
+{% block menu %}
+{#<button type="button" class="btn btn-primary button"><a href="{% url 'issue_add' %}" class="button-text-color">Add#}
+{#        issue</a></button>#}
+{% endblock %}
+{% block content %}
+<h1 class="title">Project</h1>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">Summary: {{ project.start_date }}</div>
+        </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">Description: {{ project.end_date }}</div>
+        </div>
+    </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">Description: {{ project.title }}</div>
+        </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">Status: {{ project.description }}</div>
+        </div>
+    </li>
+</ul>
+{% endblock %}

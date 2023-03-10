@@ -1,15 +1,22 @@
 from django.db import models
 from django.utils import timezone
 
+from webapp.models.project import Project
+
 
 class Issue(models.Model):
+    project = models.ForeignKey(
+        'webapp.Project',
+        related_name='issues',
+        on_delete=models.CASCADE,
+        verbose_name='Проект',
+    )
     summary = models.CharField(
         max_length=200,
         null=False,
         blank=False,
         verbose_name="Заголовок",
     )
-
     description = models.TextField(
         max_length=3000,
         null=True,
@@ -57,3 +64,10 @@ class Issue(models.Model):
         self.is_deleted = True
         self.deleted_at = timezone.now()
         self.save()
+
+    def save(self, *args, **kwargs):
+        try:
+            self.project
+        except:
+            self.project = Project.objects.first()
+        super().save(*args, **kwargs)

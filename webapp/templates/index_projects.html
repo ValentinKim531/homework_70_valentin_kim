@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block menu %}
+<button type="button" class="btn btn-primary button"><a href="{% url 'project_add' %}" class="button-text-color">Add
+    Project</a></button>
+{% endblock %}
+{% block content %}
+<h1 class="title">Project list</h1>
+
+{% for project in projects %}
+<ol class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-1 me-auto">
+      <div class="fw-bold">Project: {{ project.title }}</div>
+    </div>
+    <span class="badge bg-primary rounded-pill"><a href="{% url 'project_detail' project.pk%}"
+        class="button-text-color">More
+        info..</a></span>
+  </li>
+</ol>
+{% endfor %}
+
+
+{% endblock %}
