@@ -38,13 +38,13 @@
                 <li>
                     <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" class="btn btn-primary" value="Выйти">
+                        <input type="submit" class="btn btn-primary" value="Sign out">
                     </form>
                 </li>
-                <l>Привет {{ user.username }}</l>
+                <l>Hello {{ user.username }}</l>
                 {% else %}
                 <li>
-                    <a href="{% url 'login' %}" class="btn btn-primary">Войти</a>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Sign in</a>
                 </li>
                 {% endif %}
             </ul>
