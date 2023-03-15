@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
-{% block menu %}
-<button type="button" class="btn btn-primary button"><a href="{% url 'issue_add' %}" class="button-text-color">Add
-    Issue</a></button>
-{% endblock %}
+
 {% block content %}
 <h1 class="title">Issue list</h1>
 
@@ -18,13 +15,15 @@
     <span class="badge bg-primary rounded-pill"><a href="{% url 'issue_detail' issue.pk%}"
         class="button-text-color">More
         info..</a></span>
+      {% if user.is_authenticated %}
     <span class="badge bg-primary rounded-pill"><a href="{% url 'issue_update' issue.pk%}"
         class="button-text-color">Update</a></span>
   </li>
+{% endif %}
 </ol>
 {% endfor %}
 {% if is_paginated %}
    {% include 'partial/pagination.html' %}
 {% endif %}
-
 {% endblock %}
+

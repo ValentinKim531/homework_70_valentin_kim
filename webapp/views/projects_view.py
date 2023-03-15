@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView
 
@@ -5,7 +6,7 @@ from webapp.forms import ProjectForm
 from webapp.models import Project
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin, CreateView):
     template_name = 'project_create.html'
     model = Project
     form_class = ProjectForm

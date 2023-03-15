@@ -21,6 +21,21 @@ html, body {
 
 }
 
+
+.menu {
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    color: #fffee8;
+}
+
+.menu li {
+    display: inline-block;
+}
+
+
 .mb-3 {
     width: 50%;
 }

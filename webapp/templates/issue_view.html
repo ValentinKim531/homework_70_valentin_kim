@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Issue view{% endblock %}
-{% block menu %}
-<button type="button" class="btn btn-primary button"><a href="{% url 'issue_add' %}" class="button-text-color">Add
-        issue</a></button>
-{% endblock %}
+
 {% block content %}
 <h1 class="title">Issue</h1>
 <ul class="list-group">
@@ -36,8 +33,10 @@
         </div>
     </li>
 </ul>
+    {% if user.is_authenticated %}
 <form action="{% url 'issue_delete' issue.pk%}">
     {% csrf_token %}
     <button type="submit" class="btn btn-warning">Delete</button>
 </form>
+    {% endif %}
 {% endblock %}
