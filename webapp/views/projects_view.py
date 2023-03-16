@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView
 
@@ -6,10 +7,11 @@ from webapp.forms import ProjectForm
 from webapp.models import Project
 
 
-class ProjectCreateView(LoginRequiredMixin, CreateView):
+class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'project_create.html'
     model = Project
     form_class = ProjectForm
+    success_message = 'Project is created.'
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})

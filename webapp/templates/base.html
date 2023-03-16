@@ -28,9 +28,6 @@
                 </li>
                 {% block menu %}{% endblock %}
                 {% if user.is_authenticated %}
-                <li><button type="button" class="btn btn-primary button"><a href="{% url 'issue_add' %}"
-                            class="button-text-color">Add Issue</a></button>
-                </li>
                 <li><button type="button" class="btn btn-primary button"><a href="{% url 'project_add' %}"
                             class="button-text-color">Add
                             Project</a></button>

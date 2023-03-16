@@ -58,6 +58,16 @@
   }
 },
 {
+  "model": "webapp.project",
+  "pk": 3,
+  "fields": {
+    "start_date": "2023-03-20",
+    "end_date": "2023-03-25",
+    "title": "test",
+    "description": "test"
+  }
+},
+{
   "model": "webapp.issue",
   "pk": 1,
   "fields": {
@@ -327,24 +337,6 @@
     "type": [
       2
     ]
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$390000$QlNgkyFMHACIVK0o13dFSz$BZV7ScCWGxcnjowQiiJUtlgarW/hRBIjN1YsIk9ZyOc=",
-    "last_login": "2023-03-10T09:09:59.988Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2023-03-10T09:09:39.605Z",
-    "groups": [],
-    "user_permissions": []
   }
 }
 ]
