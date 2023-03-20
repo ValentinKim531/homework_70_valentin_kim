@@ -40,7 +40,6 @@ class CustomUserCreationForm(forms.ModelForm):
             'email'
         )
 
-
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
@@ -49,8 +48,8 @@ class CustomUserCreationForm(forms.ModelForm):
         last_name = cleaned_data.get("last_name")
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError('Пароли не совпадают!')
-
-
+        elif first_name == "" and last_name == "":
+            raise ValidationError("You need to fill one of these fields: First_name or Last_name")
 
     def save(self, commit=True):
         user = super().save(commit=False)
