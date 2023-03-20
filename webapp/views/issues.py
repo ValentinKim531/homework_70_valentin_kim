@@ -14,7 +14,7 @@ class IssueCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Issue is added.'
 
     def get_success_url(self):
-        return reverse("issue_detail", kwargs={"pk": self.object.pk})
+        return reverse("webapp:issue_detail", kwargs={"pk": self.object.pk})
 
 
 class IssueUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -24,7 +24,7 @@ class IssueUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Issue is updated'
 
     def get_success_url(self):
-        return reverse("issue_detail", kwargs={"pk": self.object.pk})
+        return reverse("webapp:issue_detail", kwargs={"pk": self.object.pk})
 
 
 class IssueDetail(DetailView):
@@ -35,7 +35,7 @@ class IssueDetail(DetailView):
 class IssueDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = "issue_confirm_delete.html"
     model = Issue
-    success_url = reverse_lazy("index")
+    success_url = reverse_lazy("webapp:index")
     success_message = 'Issue is deleted.'
 
 
@@ -51,5 +51,5 @@ class ProjectIssueCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse("issue_detail", kwargs={"pk": self.object.pk})
+        return reverse("webapp:issue_detail", kwargs={"pk": self.object.pk})
 

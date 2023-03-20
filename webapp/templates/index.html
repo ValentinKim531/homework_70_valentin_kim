@@ -4,7 +4,7 @@
 {% block menu %}
     {% if user.is_authenticated %}
     <li>
-        <button type="button" class="btn btn-primary button"><a href="{% url 'issue_add' %}"
+        <button type="button" class="btn btn-primary button"><a href="{% url 'webapp:issue_add' %}"
                             class="button-text-color">Add Issue</a></button>
     </li>
     {% endif %}
@@ -21,11 +21,11 @@
     <div class="ms-1 me-auto">
       <div class="fw-bold">Issue: {{ issue.summary }}</div>
     </div>
-    <span class="badge bg-primary rounded-pill"><a href="{% url 'issue_detail' issue.pk%}"
+    <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_detail' issue.pk%}"
         class="button-text-color">More
         info..</a></span>
       {% if user.is_authenticated %}
-    <span class="badge bg-primary rounded-pill"><a href="{% url 'issue_update' issue.pk%}"
+    <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_update' issue.pk%}"
         class="button-text-color">Update</a></span>
   </li>
 {% endif %}

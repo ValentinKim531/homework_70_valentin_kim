@@ -9,6 +9,9 @@ from webapp.views.issues import (
 )
 from webapp.views.projects_view import ProjectDetail, ProjectCreateView
 
+app_name = 'webapp'
+
+
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     path(

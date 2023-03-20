@@ -14,7 +14,7 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Project is created.'
 
     def get_success_url(self):
-        return reverse('project_detail', kwargs={'pk': self.object.pk})
+        return reverse('webapp:project_detail', kwargs={'pk': self.object.pk})
 
 
 class ProjectDetail(DetailView):

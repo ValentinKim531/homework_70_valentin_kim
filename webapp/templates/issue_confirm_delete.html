@@ -26,10 +26,10 @@
         </div>
     </li>
 </ul>
-<form action="{% url 'confirm_delete' issue.pk%}" method="post">
+<form action="{% url 'webapp:confirm_delete' issue.pk%}" method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
-    <button type="button" class="btn btn-secondary"><a href="{% url 'index' %}"
+    <button type="button" class="btn btn-secondary"><a href="{% url 'webapp:index' %}"
             class="button-text-color">Cancel</a></button>
 </form>
 

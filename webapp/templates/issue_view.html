@@ -34,7 +34,7 @@
     </li>
 </ul>
     {% if user.is_authenticated %}
-<form action="{% url 'issue_delete' issue.pk%}">
+<form action="{% url 'webapp:issue_delete' issue.pk%}">
     {% csrf_token %}
     <button type="submit" class="btn btn-warning">Delete</button>
 </form>

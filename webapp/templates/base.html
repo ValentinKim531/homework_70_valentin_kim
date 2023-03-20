@@ -20,20 +20,20 @@
     <nav class="navbar">
         <div class="container">
             <ul class="menu">
-                <li><button type="button" class="btn btn-primary button"><a href="{% url 'index' %}"
+                <li><button type="button" class="btn btn-primary button"><a href="{% url 'webapp:index' %}"
                             class="button-text-color">Home</a></button>
                 </li>
-                <li><button type="button" class="btn btn-primary button"><a href="{% url 'index_projects' %}"
+                <li><button type="button" class="btn btn-primary button"><a href="{% url 'webapp:index_projects' %}"
                             class="button-text-color">Project list</a></button>
                 </li>
                 {% block menu %}{% endblock %}
                 {% if user.is_authenticated %}
-                <li><button type="button" class="btn btn-primary button"><a href="{% url 'project_add' %}"
+                <li><button type="button" class="btn btn-primary button"><a href="{% url 'webapp:project_add' %}"
                             class="button-text-color">Add
                             Project</a></button>
                 </li>
                 <li>
-                    <form action="{% url 'logout' %}" method="post">
+                    <form action="{% url 'accounts:logout' %}" method="post">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary" value="Sign out">
                     </form>
@@ -41,7 +41,10 @@
                 <l>Hello {{ user.username }}</l>
                 {% else %}
                 <li>
-                    <a href="{% url 'login' %}" class="btn btn-primary">Sign in</a>
+                    <a href="{% url 'accounts:login' %}" class="btn btn-primary">Sign in</a>
+                </li>
+                <li>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-primary">Sign up</a>
                 </li>
                 {% endif %}
             </ul>

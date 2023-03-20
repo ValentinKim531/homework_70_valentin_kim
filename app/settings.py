@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "homework_61",
+        'NAME': "homework_62",
         'USER': "postgres",
         'PASSWORD': "1234",
         'HOST': "localhost",
@@ -129,9 +129,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'webapp:index'
+LOGOUT_REDIRECT_URL = 'webapp:index'
+LOGIN_URL = 'accounts:login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
