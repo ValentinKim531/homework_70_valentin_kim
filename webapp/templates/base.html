@@ -28,9 +28,11 @@
                 </li>
                 {% block menu %}{% endblock %}
                 {% if user.is_authenticated %}
+                {% if perms.webapp.add_project %}
                 <li><button type="button" class="btn btn-primary button"><a href="{% url 'webapp:project_add' %}"
-                            class="button-text-color">Add
-                            Project</a></button>
+                            class="button-text-color">Add Project</a>
+                    </button>
+                    {% endif %}
                 </li>
                 <li>
                     <form action="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" method="post">

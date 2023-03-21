@@ -9,11 +9,12 @@ from webapp.models import Project, ProjectUser
 from webapp.views.issues import GroupPermissionMixin
 
 
-class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class ProjectCreateView(GroupPermissionMixin, SuccessMessageMixin, CreateView):
     template_name = 'project_create.html'
     model = Project
     form_class = ProjectForm
     success_message = 'Project is created.'
+    groups = ['Project Manager']
 
     def get_success_url(self):
         return reverse('webapp:project_detail', kwargs={'pk': self.object.pk})
@@ -31,10 +32,11 @@ class ProjectDetail(LoginRequiredMixin, DetailView):
         return context
 
 
-class ProjectUserCreateView(LoginRequiredMixin, CreateView):
+class ProjectUserCreateView(GroupPermissionMixin, CreateView):
     model = ProjectUser
     template_name = 'project_user_create.html'
     form_class = ProjectUserForm
+    groups = ['Project Manager', 'Team Lead']
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
@@ -45,7 +47,8 @@ class ProjectUserCreateView(LoginRequiredMixin, CreateView):
         return redirect('webapp:project_detail', pk=project.pk)
 
 
-class ProjectUserDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectUserDeleteView(GroupPermissionMixin, DeleteView):
     model = ProjectUser
     success_url = reverse_lazy("webapp:index")
+    groups = ['Project Manager', 'Team Lead']
 

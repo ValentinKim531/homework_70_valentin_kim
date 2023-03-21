@@ -59,12 +59,22 @@
 },
 {
   "model": "webapp.project",
-  "pk": 3,
+  "pk": 5,
   "fields": {
-    "start_date": "2023-03-20",
-    "end_date": "2023-03-25",
-    "title": "test",
-    "description": "test"
+    "start_date": "2023-03-01",
+    "end_date": "2023-03-10",
+    "title": "manager",
+    "description": "manager"
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 6,
+  "fields": {
+    "start_date": "2023-03-10",
+    "end_date": "2023-03-15",
+    "title": "manager7",
+    "description": "managermanager"
   }
 },
 {
@@ -331,12 +341,52 @@
     "description": "lorem ipsun done",
     "status": 2,
     "created_at": "2023-03-10T10:31:56.673Z",
-    "updated_at": "2023-03-10T10:31:56.673Z",
-    "is_deleted": false,
-    "deleted_at": null,
+    "updated_at": "2023-03-21T08:28:05.181Z",
+    "is_deleted": true,
+    "deleted_at": "2023-03-21T08:28:05.176Z",
     "type": [
       2
     ]
+  }
+},
+{
+  "model": "webapp.projectuser",
+  "pk": 39,
+  "fields": {
+    "user": 33,
+    "project": 5
+  }
+},
+{
+  "model": "webapp.projectuser",
+  "pk": 48,
+  "fields": {
+    "user": 1,
+    "project": 6
+  }
+},
+{
+  "model": "webapp.projectuser",
+  "pk": 52,
+  "fields": {
+    "user": 32,
+    "project": 2
+  }
+},
+{
+  "model": "webapp.projectuser",
+  "pk": 53,
+  "fields": {
+    "user": 1,
+    "project": 2
+  }
+},
+{
+  "model": "webapp.projectuser",
+  "pk": 57,
+  "fields": {
+    "user": 34,
+    "project": 2
   }
 }
 ]

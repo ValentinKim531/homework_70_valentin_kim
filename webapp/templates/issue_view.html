@@ -33,10 +33,12 @@
         </div>
     </li>
 </ul>
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
+{% if perms.webapp.delete_issue %}
 <form action="{% url 'webapp:issue_delete' issue.pk%}">
     {% csrf_token %}
     <button type="submit" class="btn btn-warning">Delete</button>
 </form>
-    {% endif %}
+{% endif %}
+{% endif %}
 {% endblock %}

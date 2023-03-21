@@ -2,12 +2,14 @@
 {% block title %}Home{% endblock %}
 
 {% block menu %}
-    {% if user.is_authenticated %}
-    <li>
-        <button type="button" class="btn btn-primary button"><a href="{% url 'webapp:issue_add' %}"
-                            class="button-text-color">Add Issue</a></button>
-    </li>
-    {% endif %}
+{% if user.is_authenticated %}
+{% if perms.webapp.add_issue %}
+<li>
+  <button type="button" class="btn btn-primary button"><a href="{% url 'webapp:issue_add' %}"
+      class="button-text-color">Add Issue</a></button>
+</li>
+{% endif %}
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -24,15 +26,16 @@
     <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_detail' issue.pk%}"
         class="button-text-color">More
         info..</a></span>
-      {% if user.is_authenticated %}
+    {% if user.is_authenticated %}
+    {% if perms.webapp.change_issue %}
     <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_update' issue.pk%}"
         class="button-text-color">Update</a></span>
   </li>
-{% endif %}
+  {% endif %}
+  {% endif %}
 </ol>
 {% endfor %}
 {% if is_paginated %}
-   {% include 'partial/pagination.html' %}
+{% include 'partial/pagination.html' %}
 {% endif %}
 {% endblock %}
-

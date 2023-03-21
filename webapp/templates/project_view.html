@@ -3,21 +3,22 @@
 {% block menu %}
 {% if user.is_authenticated %}
 <li>
+    {% if perms.webapp.add_issue %}
     <button type="button" class="btn btn-primary button">
         <a href="{% url 'webapp:project_issue_add' project.pk %}" class="button-text-color">Add issue for Project</a>
     </button>
+    {% endif %}
 </li>
 <li>
+    {% if perms.webapp.add_projectuser %}
     <button type="button" class="btn btn-primary button">
         <a href="{% url 'webapp:project_user_add' project.pk %}" class="button-text-color">Add user for Project</a>
     </button>
-</li>
-<li>
-<li><button type="button" class="btn btn-primary button"><a href="{% url 'webapp:project_user_delete' project.pk %}"
-            class="button-text-color">Delete ProjectUser</a></button>
+    {% endif %}
 </li>
 {% endif %}
 {% endblock %}
+
 {% block content %}
 <h1 class="title">Project</h1>
 <ul class="list-group">
@@ -43,6 +44,9 @@
     </li>
 </ul>
 <h4 class="title">User's list:</h4>
+
+{% if user.is_authenticated %}
+{% if perms.webapp.delete_projectuser %}
 {% for user in project.project_users.all %}
 <ol class="list-group">
     <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -54,9 +58,12 @@
         <span class="badge bg-primary rounded-pill"><input type="submit" value="Удалить"></span>
     </li>
     {% empty %}
-            <p>No Project users yet.</p>
-
+    <p>No Project users yet.</p>
     {% endfor %}
+    {% endif %}
+    {% endif %}
+
+
 </ol>
 
 <h3 class="title">Project's issues</h3>
@@ -70,8 +77,10 @@
                 class="button-text-color">More
                 info..</a></span>
         {% if user.is_authenticated %}
+        {% if perms.webapp.change_issue %}
         <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_update' issue.pk%}"
                 class="button-text-color">Update</a></span>
+        {% endif %}
         {% endif %}
     </li>
 </ol>
