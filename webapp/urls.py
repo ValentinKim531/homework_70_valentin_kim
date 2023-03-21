@@ -7,7 +7,7 @@ from webapp.views.issues import (
     IssueUpdateView,
     IssueDeleteView, ProjectIssueCreateView,
 )
-from webapp.views.projects_view import ProjectDetail, ProjectCreateView
+from webapp.views.projects_view import ProjectDetail, ProjectCreateView, ProjectUserCreateView, ProjectUserDeleteView
 
 app_name = 'webapp'
 
@@ -61,4 +61,12 @@ urlpatterns = [
         ProjectIssueCreateView.as_view(),
         name='project_issue_add'
     ),
+    path(
+        'project/<int:pk>/users/add/',
+        ProjectUserCreateView.as_view(),
+        name='project_user_add'),
+    path(
+        "user/<int:pk>/delete/",
+        ProjectUserDeleteView.as_view(),
+        name="project_user_delete"),
 ]

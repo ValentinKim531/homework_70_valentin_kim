@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import CheckboxSelectMultiple
 
-from webapp.models import Type, Project
+from webapp.models import Type, Project, ProjectUser
 from webapp.models import Issue
 import string
 
@@ -84,5 +84,18 @@ class ProjectForm(forms.ModelForm):
             "title": "Название",
             "description": "Описание",
         }
+
+
+class ProjectUserForm(forms.ModelForm):
+    class Meta:
+        model = ProjectUser
+        fields = (
+            "user",
+        )
+
+        labels = {
+            "project_user": "Пользователь проекта",
+        }
+
 
 

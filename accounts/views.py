@@ -37,7 +37,11 @@ class LoginView(TemplateView):
 
 def logout_view(request):
     logout(request)
+    next = request.GET.get('next')
+    if next:
+        return redirect(next)
     return redirect('webapp:index')
+
 
 class RegisterView(CreateView):
     template_name = 'register.html'

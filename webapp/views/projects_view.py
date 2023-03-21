@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse
-from django.views.generic import CreateView, DetailView
+from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DetailView, DeleteView
 
-from webapp.forms import ProjectForm
-from webapp.models import Project
+from webapp.forms import ProjectForm, ProjectUserForm
+from webapp.models import Project, ProjectUser
 
 
 class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -28,4 +29,22 @@ class ProjectDetail(DetailView):
         context['issues'] = issues
         return context
 
+
+class ProjectUserCreateView(LoginRequiredMixin, CreateView):
+    model = ProjectUser
+    template_name = 'project_user_create.html'
+    form_class = ProjectUserForm
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        user = form.save(commit=False)
+        user.project = project
+        user.save()
+        form.save_m2m()
+        return redirect('webapp:project_detail', pk=project.pk)
+
+
+class ProjectUserDeleteView(DeleteView):
+    model = ProjectUser
+    success_url = reverse_lazy("webapp:index")
 
