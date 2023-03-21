@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Project view{% endblock %}
 {% block menu %}
-    {% if user.is_authenticated %}
-    <li>
-        <button type="button" class="btn btn-primary button">
-            <a href="{% url 'webapp:project_issue_add' project.pk %}" class="button-text-color">Add issue for Project</a>
-        </button>
-    </li>
-    {% endif %}
+{% if user.is_authenticated %}
+<li>
+    <button type="button" class="btn btn-primary button">
+        <a href="{% url 'webapp:project_issue_add' project.pk %}" class="button-text-color">Add issue for Project</a>
+    </button>
+</li>
+<li>
+    <button type="button" class="btn btn-primary button">
+        <a href="{% url 'webapp:project_user_add' project.pk %}" class="button-text-color">Add user for Project</a>
+    </button>
+</li>
+<li>
+<li><button type="button" class="btn btn-primary button"><a href="{% url 'webapp:project_user_delete' project.pk %}"
+            class="button-text-color">Delete ProjectUser</a></button>
+</li>
+{% endif %}
 {% endblock %}
 {% block content %}
 <h1 class="title">Project</h1>
@@ -22,7 +31,7 @@
             <div class="fw-bold">End Date: {{ project.end_date }}</div>
         </div>
     </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
             <div class="fw-bold">Title: {{ project.title }}</div>
         </div>
@@ -33,21 +42,37 @@
         </div>
     </li>
 </ul>
-<h3 class="title">Project's issues</h3>
-    {% for issue in issues %}
+<h4 class="title">User's list:</h4>
+{% for user in project.project_users.all %}
+{% csrf_token %}
 <ol class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-1 me-auto">
-      <div class="fw-bold">Issue: {{ issue.summary }}</div>
-    </div>
-    <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_detail' issue.pk%}"
-        class="button-text-color">More
-        info..</a></span>
-      {% if user.is_authenticated %}
-    <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_update' issue.pk%}"
-        class="button-text-color">Update</a></span>
-      {% endif %}
-  </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-1 me-auto">
+            <form action="{% url 'webapp:project_user_delete' user.pk %}" method="post">
+                <div class="fw-bold">{{ user.user }}</div>
+        </div>
+        {% if user.is_authenticated %}
+        <span class="badge bg-primary rounded-pill"><input type="submit" value="Удалить"></span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ol>
+
+<h3 class="title">Project's issues</h3>
+{% for issue in issues %}
+<ol class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-1 me-auto">
+            <div class="fw-bold">Issue: {{ issue.summary }}</div>
+        </div>
+        <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_detail' issue.pk%}"
+                class="button-text-color">More
+                info..</a></span>
+        {% if user.is_authenticated %}
+        <span class="badge bg-primary rounded-pill"><a href="{% url 'webapp:issue_update' issue.pk%}"
+                class="button-text-color">Update</a></span>
+        {% endif %}
+    </li>
 </ol>
 {% endfor %}
 {% endblock %}

@@ -2,7 +2,7 @@
 {% block title %}Issue create{% endblock %}
 
 {% block content %}
-<h1 class="title">Create issue</h1>
+<h1 class="title">Create project</h1>
 <form action="{% url 'webapp:project_add' %}" method="post">
     {% include 'partial/issue_form.html' with button_text='Create' %}
 </form>

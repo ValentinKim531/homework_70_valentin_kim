@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Issue confirm delete{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+<h1 class="title">Are you sure you want to delete this User from Project?</h1>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">ID: {{ projectuser.pk }}</div>
+        </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">User name: {{ projectuser.user }}</div>
+        </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+            <div class="fw-bold" style="white-space: pre-wrap">User's Project: {{ projectuser.project }}</div>
+        </div>
+    </li>
+</ul>
+<form action="{% url 'webapp:confirm_project_user_delete' projectuser.pk%}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="button" class="btn btn-secondary"><a href="{% url 'webapp:index' %}"
+            class="button-text-color">Cancel</a></button>
+</form>
+
+{% endblock %}

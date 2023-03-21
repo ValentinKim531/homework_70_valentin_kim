@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Issue, Status, Type, Project
+from .models import Issue, Status, Type, Project, ProjectUser
 
 
 # Register your models here.
@@ -75,3 +75,21 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, ProjectAdmin)
+
+
+class ProjectUserAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "user",
+        "project",
+    )
+    list_filter = ("id", "user",)
+    fields = (
+        "user",
+        "project",
+    )
+    readonly_fields = ("id",)
+
+
+admin.site.register(ProjectUser, ProjectUserAdmin)
+

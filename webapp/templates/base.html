@@ -33,7 +33,7 @@
                             Project</a></button>
                 </li>
                 <li>
-                    <form action="{% url 'accounts:logout' %}" method="post">
+                    <form action="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" method="post">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-primary" value="Sign out">
                     </form>
@@ -41,7 +41,8 @@
                 <l>Hello {{ user.username }}</l>
                 {% else %}
                 <li>
-                    <a href="{% url 'accounts:login' %}" class="btn btn-primary">Sign in</a>
+                    <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}" class="btn btn-primary">Sign
+                        in</a>
                 </li>
                 <li>
                     <a href="{% url 'accounts:register' %}" class="btn btn-primary">Sign up</a>
