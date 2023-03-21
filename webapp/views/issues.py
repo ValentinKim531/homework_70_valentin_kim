@@ -1,10 +1,16 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 from webapp.forms import IssueForm
 from webapp.models import Issue, Project
+
+
+class GroupPermissionMixin(UserPassesTestMixin):
+    pass
+    # def test_func(self):
+    #     return self.request.user.groups.filter(name__in=['manager', 'lead', 'dev']).exists()
 
 
 class IssueCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):

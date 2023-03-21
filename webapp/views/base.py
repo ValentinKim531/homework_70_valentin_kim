@@ -3,6 +3,7 @@ from django.utils.http import urlencode
 from django.views.generic import RedirectView, ListView
 from webapp.forms import SimpleSearchForm
 from webapp.models import Issue, Project
+from webapp.views.issues import GroupPermissionMixin
 
 
 class IndexView(ListView):

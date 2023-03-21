@@ -6,6 +6,7 @@ from django.views.generic import CreateView, DetailView, DeleteView
 
 from webapp.forms import ProjectForm, ProjectUserForm
 from webapp.models import Project, ProjectUser
+from webapp.views.issues import GroupPermissionMixin
 
 
 class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -18,7 +19,7 @@ class ProjectCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return reverse('webapp:project_detail', kwargs={'pk': self.object.pk})
 
 
-class ProjectDetail(DetailView):
+class ProjectDetail(LoginRequiredMixin, DetailView):
     template_name = 'project_view.html'
     model = Project
 
@@ -44,7 +45,7 @@ class ProjectUserCreateView(LoginRequiredMixin, CreateView):
         return redirect('webapp:project_detail', pk=project.pk)
 
 
-class ProjectUserDeleteView(DeleteView):
+class ProjectUserDeleteView(LoginRequiredMixin, DeleteView):
     model = ProjectUser
     success_url = reverse_lazy("webapp:index")
 
