@@ -1,5 +1,4 @@
-from django.http import JsonResponse, Http404
-from django.views import View
+from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,7 +8,6 @@ from webapp.models import Issue, Project
 
 
 class IssueListView(APIView):
-
     def get(self, request, *args, **kwargs):
         objects = Issue.objects.all()
         serializer = IssueSerializer(objects, many=True)
@@ -17,7 +15,6 @@ class IssueListView(APIView):
 
 
 class ProjectListView(APIView):
-
     def get(self, request, *args, **kwargs):
         objects = Project.objects.all()
         serializer = ProjectSerializer(objects, many=True)
@@ -25,7 +22,6 @@ class ProjectListView(APIView):
 
 
 class IssueDetailView(APIView):
-
     def get(self, request, pk):
         try:
             object = Issue.objects.get(pk=pk)
@@ -36,7 +32,6 @@ class IssueDetailView(APIView):
 
 
 class ProjectDetailView(APIView):
-
     def get(self, request, pk):
         try:
             object = Project.objects.get(pk=pk)
@@ -64,3 +59,32 @@ class UpdateProject(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteIssue(APIView):
+    def delete(self, request, pk):
+        try:
+            object = Issue.objects.get(pk=pk)
+            id = object.pk
+            object.delete()
+            return Response(
+                {"Задача была успешно удалена, со следующим ID:": id},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except Issue.DoesNotExist:
+            raise Http404
+
+
+class DeleteProject(APIView):
+    def delete(self, request, pk):
+        try:
+            object = Project.objects.get(pk=pk)
+            id = object.pk
+            object.delete()
+            print(object.pk)
+            return Response(
+                {"Проект был успешно удален, со следующим ID:": id},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except Project.DoesNotExist:
+            raise Http404
