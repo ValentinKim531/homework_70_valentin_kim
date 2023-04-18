@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "webapp",
     "debug_toolbar",
     'django_bootstrap5',
-    'accounts'
+    'accounts',
+    'rest_framework',
+    # 'api',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "homework_62",
+        'NAME': "homework_70",
         'USER': "postgres",
         'PASSWORD': "1234",
         'HOST': "localhost",

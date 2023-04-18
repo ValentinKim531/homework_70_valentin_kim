@@ -5,3 +5,4 @@ django_debug_toolbar==3.8.1
 ordering==0.2.0
 psycopg2-binary==2.9.5
 sqlparse==0.4.3
+djangorestframework==3.14.0
