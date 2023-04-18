@@ -44,3 +44,23 @@ class ProjectDetailView(APIView):
             return Response(serializer.data)
         except Project.DoesNotExist:
             raise Http404
+
+
+class UpdateIssue(APIView):
+    def put(self, request, pk):
+        object = Issue.objects.get(pk=pk)
+        serializer = IssueSerializer(object, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateProject(APIView):
+    def put(self, request, pk):
+        object = Project.objects.get(pk=pk)
+        serializer = ProjectSerializer(object, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
